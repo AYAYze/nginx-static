@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title> Bounce Window </title>
+</head>
+<body>
+    
+
+
+    <script>
+        const width = 1920;
+        const height = 1060;
+
+        let x = width / 2;
+        let y = height - 500;
+
+        let dx = 10;
+        let dy = -10;
+
+        const size = {
+            x: 200,
+            y: 200,
+        }
+
+        function init(){
+            let wd = window.open('', '', `width=${size.x}, height=${size.y}`)
+            setInterval(() => {
+                draw(wd)
+            }, 10);
+        }
+
+        function draw(w){
+            w.moveTo(x, y);
+
+            /*
+            여기 주석은 쓰지 마세요
+            
+            if(x + dx > width || x + dx < 0 + size.x) {
+                dx = -dx;
+            }else if(y + dy > height || y + dy < 0 + size.y) {
+                dy = -dy;
+            }
+            0 + 뭐든 = 뭐든 이니까 0은 뺍니다.
+            그리고 중괄호 빼버려서 그냥 이쁘게 할게요
+            */
+            x += dx;
+            y += dy;
+            
+            if(x + dx > width - size.x || x + dx < 0) dx = -dx;
+            else if(y + dy > height - size.y || y + dy < 0) dy = -dy;
+        }
+
+
+        init();
+    </script>
+</body>
+</html>

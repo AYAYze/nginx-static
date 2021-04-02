@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Canvas를 배워보자 </title>
+</head>
+<body>
+    <canvas id="canvas" width="500px" height="500px"> </canvas>
+
+    <script>
+        const canvas = document.getElementById("canvas");
+        const ctx = canvas.getContext('2d');
+        ctx.transform(2, 0, 0, -2, 0, canvas.height)
+
+        function 지수(x){
+            console.log(Math.pow(1/2, x))
+            return Math.pow(1/2, x) * 500;
+        }
+        function f(x){
+            return x;
+        }
+        for(let x = 0; x <= 500; x += 0.1){
+            ctx.beginPath();
+            ctx.moveTo(x, 지수(x))
+            ctx.lineTo(x+1, 지수(x+1))
+            ctx.stroke();
+        }
+    </script>
+</body>
+</html>

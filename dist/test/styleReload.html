@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> 스타일 재적용이 안돼요 </title>
+</head>
+    <style>
+        body {
+            margin: 0 auto;
+        }
+        #con {
+            display: flex;
+            flex-wrap: nowrap;
+            height: 300px;
+
+        }
+        .box {
+            width: 300px;
+            height: 300px;
+            color:white;
+            text-align: center;
+            line-height: 300px;
+            font-size: 50px;
+        }
+        #a{
+            background-color:#ff7473;
+            transition: all 0.2s ease-out;
+        }
+
+        #b {
+            background-color:#b6dacb;
+            transition: all 0.2s ease-out;
+        }
+
+        #c {
+            background-color: #220b04;
+            transition: all 0.2s ease-out;
+        }
+
+        .remove {
+            transform: scale(0,0);
+        }
+
+        .but {
+            border:none;
+            background-color: #8f999c;
+            color: white;
+            padding: 5px;
+            border-radius:5px;
+            width: 250px;
+            font-size: 40px;
+        }
+    </style>
+<body>
+    <div id="con">
+        <div id="a" class="box"> A </div>
+        <div id="b" class="box"> B </div>
+        <div id="c" class="box"> C </div>
+    </div>
+    <br>
+    <button onclick="ar()" class="but">A를 지워요</button>
+    <button onclick="br()" class="but">B를 지워요</button>
+    <button onclick="cr()" class="but">C를 지워요</button>
+
+    <script>
+        let a,b,c;
+        a = document.getElementById("a");
+        b = document.getElementById("b");
+        c = document.getElementById("c");
+        let con = document.getElementById("con");
+
+        function ar(){
+            a.classList.add("remove");
+
+        }
+        
+        let first = b.getBoundingClientRect();
+
+        a.addEventListener("transitionend", ()=>{
+
+            a.remove();
+
+            
+            let last = b.getBoundingClientRect();
+
+            let delX = first.left - last.left;
+            let delY = first.top - last.top;
+
+            b.animate([{
+                transformOrigin: 'top left',
+                transform: `
+                    translate(${delX}px, ${delY}px)
+                `
+            }, {
+                transformOrigin: 'top left', 
+                transform: 'none'
+            }], {
+                duration: 300,
+                easing: `ease-in-out`,
+                fill: 'none'
+            })
+        })
+        console.log(first);
+        function br(){
+            b.classList.add("remove");
+        }
+
+        b.addEventListener("transitionend", ()=>{
+            b.remove();
+        })
+
+
+        function cr(){
+            c.classList.add("remove");
+        }
+        c.addEventListener("transitionend", ()=>{
+            c.remove();
+        })
+    </script>
+</body>
+</html>
